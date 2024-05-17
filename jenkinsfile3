@@ -1,0 +1,15 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('docker deploy to container') {
+            steps {
+                script{
+                    withDockerRegistry(credentialsId: 'adildal', toolName: 'docker ') {
+                        sh 'docker run -d --name shopping-cart -p 8070:8070 adildal/shopping:latest'
+                       }
+                }
+            }
+        }
+    }
+}
